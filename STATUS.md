@@ -9,7 +9,7 @@
 ## What is validated
 
 - Allowlist / deny
-- PIN unlock and TTL behavior (as coded)
+- PIN open and TTL behavior (as coded)
 - Kill switch
 - Rate limits
 - Injection heuristic block list
