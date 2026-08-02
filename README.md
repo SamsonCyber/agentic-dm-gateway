@@ -2,7 +2,7 @@
 
 A small Python library that sits **in front of an LLM agent** on private chat (typically Discord DMs).
 
-It decides **who may talk to the agent**, **whether the session is unlocked**, **whether the process is paused**, and **whether this message is safe enough to forward**. Your model and tools stay behind that gate. The library does not call an LLM and does not implement product features beyond security.
+It decides who may talk, whether the session is unlocked, whether the process is paused, and whether this message is safe enough to forward. Your model and tools stay behind that gate. The library does not call an LLM. It does not implement product features beyond security.
 
 **Live:** https://github.com/SamsonCyber/agentic-dm-gateway
 
@@ -36,7 +36,7 @@ This package is that control plane.
 | **Audit log** | Append-only JSONL of allow/deny/auth/kill events for later review. |
 | **Local commands** | `/auth`, `/lock`, `/kill`, `/unkill`, `/status` handled without calling a model. |
 
-**What it is not:** a chatbot, a trading bot, a scanner, or an agent framework. You pass an `agent(user_id, text) -> str` (or async) if you use Discord. The core works with any integer user id and plain text.
+Scope: security gate only. Not a chatbot, trading bot, scanner, or agent framework. Pass an `agent(user_id, text) -> str` (or async) if you use Discord. The core works with any integer user id and plain text.
 
 ---
 
@@ -123,10 +123,10 @@ elif pre.reply_text:
 
 `PrecheckResult` fields:
 
-- `run_agent` — forward to the model only if true  
-- `sanitized_text` — cleaned input  
-- `reply_text` — deny / control-command reply  
-- `stage` — `allowlist` | `kill` | `pin` | `rate` | `injection` | `ok` | …
+- `run_agent`: forward to the model only if true
+- `sanitized_text`: cleaned input
+- `reply_text`: deny / control-command reply
+- `stage`: `allowlist` | `kill` | `pin` | `rate` | `injection` | `ok` | ...
 
 ---
 
