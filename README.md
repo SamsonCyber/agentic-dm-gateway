@@ -45,6 +45,13 @@ Scope: security gate only. Not a chatbot, trading bot, scanner, or agent framewo
 
 ---
 
+
+## Demo
+
+![Agentic DM Gateway pipeline](docs/demo/gateway-pipeline.png)
+
+*Hermes-inspired control plane stages + real precheck outcomes (allowlist deny, injection block, ok path).*
+
 ## How to hook it in
 
 Three integration paths. Pick one.
