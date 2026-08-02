@@ -4,6 +4,10 @@ A small Python library that sits **in front of an LLM agent** on private chat (t
 
 It decides who may talk, whether the session is unlocked, whether the process is paused, and whether this message is safe enough to forward. Your model and tools stay behind that gate. The library does not call an LLM. It does not implement product features beyond security.
 
+**Maturity:** implemented · independently validated · maintained. See [STATUS.md](STATUS.md).  
+**Reproduce:** `bash scripts/repro.sh` or `powershell -File scripts/repro.ps1` (expects `REPRO_OK`).
+
+
 **Live:** https://github.com/SamsonCyber/agentic-dm-gateway
 
 ---
@@ -14,7 +18,7 @@ If you put an agent on Discord (or any chat API) with tools, anyone who can mess
 
 - use the agent without permission
 - burn API quota with floods
-- inject “ignore previous instructions” style prompts
+- inject â€œignore previous instructionsâ€ style prompts
 - trick the model into echoing API keys or other secrets
 
 You need a **control plane** (identity and process controls) separate from the **data plane** (message text the model sees).
@@ -45,15 +49,15 @@ Scope: security gate only. Not a chatbot, trading bot, scanner, or agent framewo
 ```
 1. Adapter: ignore bots; only accept DMs (not server channels)
 2. Allowlist: is this user id permitted?
-3. Owner commands: /kill /unkill /status  → reply, stop
-4. Session commands: /auth <pin> /lock      → reply, stop
+3. Owner commands: /kill /unkill /status  â†’ reply, stop
+4. Session commands: /auth <pin> /lock      â†’ reply, stop
 5. SecurityGateway.check_message:
       kill switch?
       session unlocked? (PIN)
       under rate limit?
       length + injection heuristics OK?
-6. If ok → run_agent=True with sanitized text
-7. After your agent returns → sanitize_agent_output (redact + strip image beacons)
+6. If ok â†’ run_agent=True with sanitized text
+7. After your agent returns â†’ sanitize_agent_output (redact + strip image beacons)
 8. Audit rows written along the way
 ```
 
