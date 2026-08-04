@@ -1,5 +1,7 @@
 # Agentic DM Gateway
 
+![agentic-dm-gateway banner](banner.jpg)
+
 A small Python library that sits **in front of an LLM agent** on private chat (typically Discord DMs).
 
 It decides **who may talk to the agent**, **whether the session is unlocked**, **whether the process is paused**, and **whether this message is safe enough to forward**. Your model and tools stay behind that gate. The library does not call an LLM and does not implement product features beyond security.
@@ -14,7 +16,7 @@ If you put an agent on Discord (or any chat API) with tools, anyone who can mess
 
 - use the agent without permission
 - burn API quota with floods
-- inject “ignore previous instructions” style prompts
+- inject â€œignore previous instructionsâ€ style prompts
 - trick the model into echoing API keys or other secrets
 
 You need a **control plane** (identity and process controls) separate from the **data plane** (message text the model sees).
@@ -45,15 +47,15 @@ This package is that control plane.
 ```
 1. Adapter: ignore bots; only accept DMs (not server channels)
 2. Allowlist: is this user id permitted?
-3. Owner commands: /kill /unkill /status  → reply, stop
-4. Session commands: /auth <pin> /lock      → reply, stop
+3. Owner commands: /kill /unkill /status  â†’ reply, stop
+4. Session commands: /auth <pin> /lock      â†’ reply, stop
 5. SecurityGateway.check_message:
       kill switch?
       session unlocked? (PIN)
       under rate limit?
       length + injection heuristics OK?
-6. If ok → run_agent=True with sanitized text
-7. After your agent returns → sanitize_agent_output (redact + strip image beacons)
+6. If ok â†’ run_agent=True with sanitized text
+7. After your agent returns â†’ sanitize_agent_output (redact + strip image beacons)
 8. Audit rows written along the way
 ```
 
@@ -123,10 +125,10 @@ elif pre.reply_text:
 
 `PrecheckResult` fields:
 
-- `run_agent` — forward to the model only if true  
-- `sanitized_text` — cleaned input  
-- `reply_text` — deny / control-command reply  
-- `stage` — `allowlist` | `kill` | `pin` | `rate` | `injection` | `ok` | …
+- `run_agent` â€” forward to the model only if true  
+- `sanitized_text` â€” cleaned input  
+- `reply_text` â€” deny / control-command reply  
+- `stage` â€” `allowlist` | `kill` | `pin` | `rate` | `injection` | `ok` | â€¦
 
 ---
 
