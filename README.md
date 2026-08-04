@@ -1,4 +1,6 @@
-# Agentic DM Gateway
+# Agentic DM Gateway
+
+![agentic-dm-gateway banner](banner.jpg)
 
 Security control plane for LLM agents over private chat (typically Discord DMs).
 
@@ -6,7 +8,7 @@ It sits **in front of your agent**. It decides who may talk, whether the session
 
 **Hermes-inspired.** Design follows the same control-plane ideas used in [Hermes Agent](https://github.com/NousResearch/hermes-agent) messaging gateways: DM-first delivery, identity allowlists, pairing-style open, owner kill switch, and a hard split between *who may act* (control plane) and *message text the model sees* (data plane). This package is a small, standalone extract of that pattern for any agent callable. Not affiliated with Nous Research.
 
-**Maturity:** implemented · independently validated · maintained. See [STATUS.md](STATUS.md). 
+**Maturity:** implemented Â· independently validated Â· maintained. See [STATUS.md](STATUS.md). 
 **Reproduce:** `python scripts/repro.py` (expects `REPRO_OK`).
 
 **Live:** https://github.com/SamsonCyber/agentic-dm-gateway
@@ -85,12 +87,16 @@ Install with Discord support, point env at your user ids, register the gateway, 
 
 ```bash
 pip install -e ".[discord]"
-# or: pip install agentic-dm-gateway[discord]
+# or: pip install agentic-dm-gateway[discord]
+
+![agentic-dm-gateway banner](banner.jpg)
 
 export DISCORD_BOT_TOKEN=...
 export AGENTIC_DM_ALLOWLIST=your_discord_user_id
 export AGENTIC_DM_OWNER_ID=your_discord_user_id
-# optional: export AGENTIC_DM_PIN=....
+# optional: export AGENTIC_DM_PIN=....
+
+![agentic-dm-gateway banner](banner.jpg)
 python examples/discord_echo_bot.py
 ```
 
@@ -200,7 +206,7 @@ Hook checklist:
 2. On each inbound message: `pre = pipe.precheck(user_id, text)`.
 3. If `pre.run_agent`: call your agent with `pre.sanitized_text` only.
 4. Always pass model output through `sanitize_agent_output` before send.
-5. Treat control replies (`/auth`, `/kill`, …) as done when `run_agent` is false.
+5. Treat control replies (`/auth`, `/kill`, â€¦) as done when `run_agent` is false.
 
 ---
 
